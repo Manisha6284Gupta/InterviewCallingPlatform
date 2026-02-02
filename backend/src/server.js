@@ -13,6 +13,9 @@ app.get("/", (req,res) => {
 
 
 const startServer = async () => {
+    if(!ENV.DB_URL){
+        throw new Error("DB_URL is not defined in environment variable");
+    }
     try{
         await connectDB();
         app.listen(ENV.PORT, () => {console.log("Server is running on port:", ENV.PORT)
